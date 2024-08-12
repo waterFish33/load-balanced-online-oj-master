@@ -32,7 +32,7 @@ namespace ns_compiler
             {
                 // 对标准错误进行重定向
                 umask(0);
-                int _errfd = open(PathUtil::Stderr(filename).c_str(), O_CREAT | O_WRONLY,0644);
+                int _errfd = open(PathUtil::CompileErr(filename).c_str(), O_CREAT | O_WRONLY,0644);
                 if (_errfd < 0)
                 {
                     LOG(WARNING) << "创建stderror文件失败" << "\n";
@@ -55,7 +55,7 @@ namespace ns_compiler
                     return true;
                 }
             }
-            LOG(ERROR) << "编译失败，不存在可执行文件" << "\n";
+            LOG(ERROR) << "编译失败，不存在目标文件" << "\n";
             return false;
         }
     };
