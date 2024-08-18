@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>题库</title>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th>编号</th>
+            <th>题目</th>
+            <th>难度</th>
+
+        </tr>
+        {{#questions_list}}
+        <tr>
+            <td>{{number}}</td>
+            <td>{{title}}</td>
+            <td>{{level}}</td>
+            <td><a href="/questions/{{number}}">点击开始做题</a></td>
+        </tr>
+        {{/questions_list}}
+
+    </table>
+</body>
+
+</html>
