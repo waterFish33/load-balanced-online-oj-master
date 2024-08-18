@@ -16,6 +16,34 @@ namespace ns_compile_server
     class compile_server
     {
     public:
+        // 在运行中会生成的临时文件个数并不清楚，但总数确定，逐个判断文件是否存在然后删除
+        static void RemoveTempFile(const std::string filename)
+        {
+            std::string _src = PathUtil::Src(filename);
+            if (FileUtil::FileIsExist(_src))
+                unlink(_src.c_str());
+
+            std::string _compile_err = PathUtil::CompileErr(filename);
+            if (FileUtil::FileIsExist(_compile_err))
+                unlink(_compile_err.c_str());
+
+            std::string _execute = PathUtil::Exe(filename);
+            if (FileUtil::FileIsExist(_execute))
+                unlink(_execute.c_str());
+
+            std::string _stdin = PathUtil::Stdin(filename);
+            if (FileUtil::FileIsExist(_stdin))
+                unlink(_stdin.c_str());
+
+            std::string _stdout = PathUtil::Stdout(filename);
+            if (FileUtil::FileIsExist(_stdout))
+                unlink(_stdout.c_str());
+
+            std::string _stderr = PathUtil::Stderr(filename);
+            if (FileUtil::FileIsExist(_stderr))
+                unlink(_stderr.c_str());
+        }
+
         static std::string ToDesc(const int out_status, const std::string &filename)
         {
             std::string desc;
@@ -129,6 +157,9 @@ namespace ns_compile_server
             }
             Json::FastWriter writer;
             *json_out = writer.write(_json_out);
+
+            // 清理临时文件
+            // RemoveTempFile(filename);
         }
     };
 

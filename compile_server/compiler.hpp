@@ -41,7 +41,7 @@ namespace ns_compiler
                 dup2(_errfd, 2);
                 // 子进程
                 // LOG(INFO)<<PathUtil::Exe(filename)<<"->"<<PathUtil::Src(filename)<<"\n";
-                execlp("g++","g++", "-o", PathUtil::Exe(filename).c_str(), PathUtil::Src(filename).c_str(), "-std=c++11", nullptr);
+                execlp("g++","g++", "-o", PathUtil::Exe(filename).c_str(), PathUtil::Src(filename).c_str(),"-D" ,"COMPILE_ONLINE", "-std=c++11", nullptr);
                 LOG(ERROR) << "子进程程序替换失败，可能参数错误" << "\n";
                 exit(2);
             }
