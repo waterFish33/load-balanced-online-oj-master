@@ -13,14 +13,14 @@ int main()
   Server server;
   Control cntl;
   // 获取所有题目
-  server.Post("/questions/all", [&cntl](const Request &res, Response &resp)
+  server.Get("/questions/all", [&cntl](const Request &res, Response &resp)
               { 
                 std::string html;
                 cntl.AllQuestions(&html);
                 resp.set_content(html, "text/html;charset=utf-8"); });
 
   // 获取指定题目编号的题目
-  server.Post(R"(/questions/(\d+))", [&cntl](const Request &res, Response &resp)
+  server.Get(R"(/questions/(\d+))", [&cntl](const Request &res, Response &resp)
               {
                  std::string html;
                  std::string number = res.matches[1];
