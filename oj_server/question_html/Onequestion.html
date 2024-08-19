@@ -190,15 +190,11 @@
         });
 
         function submit() {
-            // alert("嘿嘿!");
-            // 1. 收集当前页面的有关数据, 1. 题号 2.代码
+            // 收集页面相关数据：1、题号 2、代码
             var code = editor.getSession().getValue();
-            // console.log(code);
             var number = $(".container .part1 .left_desc h3 #number").text();
-            // console.log(number);
             var judge_url = "/judge/" + number;
-            // console.log(judge_url);
-            // 2. 构建json，并通过ajax向后台发起基于http的json请求
+            // 构建json，通过ajax向后台发起基于http的json请求
             $.ajax({
                 method: 'Post',   // 向后端发起请求的方式
                 url: judge_url,   // 向后端指定的url发起请求
@@ -214,45 +210,9 @@
                     show_result(data);
                 }
             });
-            // 3. 得到结果，解析并显示到 result中
-            function show_result(data) {
-                // console.log(data.status);
-                // console.log(data.reason);
-                // 拿到result结果标签
-                var result_div = $(".container .part2 .result");
-                // 清空上一次的运行结果
-                result_div.empty();
-
-                // 首先拿到结果的状态码和原因结果
-                var _status = data.status;
-                var _reason = data.reason;
-
-                var reason_lable = $("<p>", {
-                    text: _reason
-                });
-                reason_lable.appendTo(result_div);
-
-                if (status == 0) {
-                    // 请求是成功的，编译运行过程没出问题，但是结果是否通过看测试用例的结果
-                    var _stdout = data.stdout;
-                    var _stderr = data.stderr;
-
-                    var stdout_lable = $("<pre>", {
-                        text: _stdout
-                    });
-
-                    var stderr_lable = $("<pre>", {
-                        text: _stderr
-                    })
-
-                    stdout_lable.appendTo(result_div);
-                    stderr_lable.appendTo(result_div);
-                }
-                else {
-                    // 编译运行出错,do nothing
-                }
-            }
+            // 得到结果，解析并显示到result中
         }
+
     </script>
 </body>
 
