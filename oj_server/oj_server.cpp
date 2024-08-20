@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <signal.h>
 
 #include "../comm/httplib.h"
 #include "./oj_control.hpp"
@@ -7,11 +8,19 @@
 using namespace httplib;
 using namespace ns_control;
 
+static Control* cntl_ptr=nullptr;
+void Recovery(int signo)
+{
+    cntl_ptr->RecoverMachine();
+}
 int main()
 {
+  
   // 用户请求的路由功能
   Server server;
   Control cntl;
+  cntl_ptr=&cntl;
+  signal(SIGQUIT,Recovery);
   // 获取所有题目
   server.Get("/questions/all", [&cntl](const Request &res, Response &resp)
               { 

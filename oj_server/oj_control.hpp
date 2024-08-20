@@ -42,6 +42,12 @@ namespace ns_control
             --load;
             mtx->unlock();
         }
+        void ResetLoad()
+        {
+            mtx->lock();
+            load=0;
+            mtx->unlock();
+        }
     };
 
     std::string machine_conf = "./service_machine/service_machine.conf";
@@ -136,6 +142,7 @@ namespace ns_control
         {
             for(auto it=on_machine.begin();it!=on_machine.end();it++){
                 if(*it==id){
+                    machines[id].ResetLoad();
                     on_machine.erase(it);
                     off_machine.push_back(id);
                     break;
@@ -144,7 +151,11 @@ namespace ns_control
         }
         void OnMachine()
         {
+            mtx.lock();
+            on_machine.insert(on_machine.end(),off_machine.begin(),off_machine.end());
+            off_machine.erase(off_machine.begin(),off_machine.end());
 
+            mtx.unlock();
         }
     };
 
@@ -253,6 +264,9 @@ namespace ns_control
                     }
                 }
             }
+        }
+        void RecoverMachine(){
+            _load_balance.OnMachine();
         }
     };
 }

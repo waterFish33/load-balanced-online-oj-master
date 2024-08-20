@@ -5,6 +5,7 @@
 #include <vector>
 #include <fstream>
 #include <iostream>
+#include <algorithm>
 #include <assert.h>
 
 #include "../comm/Log.hpp"
@@ -87,6 +88,11 @@ namespace ns_model
         {
             if (questions_list.size() == 0)
             {
+                // 按照题目编号对题目进行排序
+                sort(vq->begin(),vq->end(),[](const struct Question& q1 ,const struct Question& q2){
+                    return atoi(q1.number.c_str())<atoi(q2.number.c_str());
+                });
+
                 LOG(ERROR) << "用户加载题库失败" << "\n";
                 return false;
             }
