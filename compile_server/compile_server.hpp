@@ -159,7 +159,7 @@ namespace ns_compile_server
             *json_out = writer.write(_json_out);
 
             // 清理临时文件
-            // RemoveTempFile(filename);
+            RemoveTempFile(filename);
         }
     };
 
