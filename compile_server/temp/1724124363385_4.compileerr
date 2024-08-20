@@ -1,0 +1,7 @@
+./temp/1724124363385_4.cpp: In member function ‘int Solution::Max(std::vector<int>&)’:
+./temp/1724124363385_4.cpp:13:9: error: ‘ll’ was not declared in this scope
+         ll
+         ^~
+./temp/1724124363385_4.cpp:15:5: warning: no return statement in function returning non-void [-Wreturn-type]
+     }
+     ^
