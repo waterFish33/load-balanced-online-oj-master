@@ -8,7 +8,7 @@
 #include <jsoncpp/json/json.h>
 
 #include "../comm/httplib.h"
-#include "./oj_model.hpp"
+#include "./oj_model_MySQL.hpp"
 #include "./oj_view.hpp"
 #include "../comm/Log.hpp"
 #include "../comm/util.hpp"
@@ -217,6 +217,7 @@ namespace ns_control
             // 2.代码拼接（用户的代码和测试用例代码进行拼接）
             Json::Value compile_value;
             std::string code = in_value["code"].asString();
+            code+="\n";
             code += q.tail;
 
             compile_value["code"] = code;

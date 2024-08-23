@@ -5,7 +5,7 @@
 #include <ctemplate/template.h>
 #include <string>
 
-#include "oj_model.hpp"
+#include "oj_model_MySQL.hpp"
 #include <ctemplate/template_dictionary.h>
 
 namespace ns_view

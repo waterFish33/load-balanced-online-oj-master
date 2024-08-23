@@ -1,5 +1,5 @@
 oj_server:oj_server.cpp
-	g++ -o $@ $^ -std=c++11 -lpthread -lctemplate -ljsoncpp
+	g++ -o $@ $^  -I/usr/include/mysql -L/usr/lib64/mysql -lpthread -lctemplate -ljsoncpp -lmysqlclient
 .PHONY:clean
 clean:
-	rm -f oj_server
+	rm -rf oj_server
